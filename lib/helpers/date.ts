@@ -28,8 +28,8 @@ export const dateTimeStringFormat = (value: number) => {
 };
 
 export const stringNumberToDate = (value: string) => {
-  const seconds = +value;
-  const dateObject = new Date(seconds * 1000);
+  const milli = +value;
+  const dateObject = new Date(milli);
   return dateObject;
 };
 

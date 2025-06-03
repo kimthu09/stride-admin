@@ -141,3 +141,75 @@ export interface SportData {
   data: Sport[];
   page: PagingType;
 }
+
+export interface ReportActivity {
+  totalTime: number;
+  totalDistance: number;
+  totalElevationGain: number;
+  numberActivity: number;
+  numberUsers: number;
+  recentActivities: RecentActivity[];
+}
+
+export interface RecentActivity {
+  id: string;
+  sport: SportInReport;
+  time: number;
+  elevationGain?: number;
+  distance?: number;
+  calories: number;
+  avgHeartRate?: number;
+}
+
+export interface SportReport {
+  numberSports: number;
+  sportMapTypes: SportReportTypeItem[];
+  sports: SportInReport[];
+}
+
+export interface SportReportTypeItem {
+  type: string;
+  numberActivities: number;
+}
+export interface SportInReport {
+  id: string;
+  name: string;
+  image: string;
+  sportMapType: string;
+  color: string;
+  numberActivities: number;
+}
+
+export interface UserReport {
+  totalUsers: number;
+  users: UserInReport[];
+}
+
+export interface UserInReport {
+  provider: string;
+  value: number;
+}
+
+export interface ReportData {
+  activity: ReportActivity;
+  sportReport: SportReport;
+  userReport: UserReport;
+  sportMapTypes: SportMapBucket[];
+}
+
+export interface ReportParam extends PagingParam {
+  fromDate?: number;
+  toDate?: number;
+}
+
+export interface SportMapValue {
+  type: string;
+  numberActivities: number;
+  time: number;
+}
+
+export interface SportMapBucket {
+  from: number;
+  to: number;
+  values: SportMapValue[];
+}
