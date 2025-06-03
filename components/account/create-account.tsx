@@ -4,7 +4,6 @@ import { Input } from "../ui/input";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { SubmitErrorHandler, SubmitHandler, useForm } from "react-hook-form";
-import { FaPlus } from "react-icons/fa";
 import { passwordMinError, required } from "@/lib/helpers/zod";
 import { toast } from "@/hooks/use-toast";
 import {
@@ -108,7 +107,6 @@ const CreateAccountDialog = ({ onAdded }: CreateAccountProps) => {
       <DialogTrigger asChild>
         <Button className="px-4 whitespace-nowrap">
           <div className="flex flex-wrap gap-1 items-center">
-            <FaPlus />
             Create Admin
           </div>
         </Button>

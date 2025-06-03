@@ -19,7 +19,6 @@ import {
 
 import { Sport } from "@/lib/types";
 import CreateSportDialog from "./create-sport";
-// import EditSportDialog from "./edit-sport";
 import TableSkeleton from "../table-skeleton";
 import Paging from "../paging";
 import { useSportList } from "@/hooks/useSport";
@@ -31,7 +30,7 @@ import { useRouter } from "next/navigation";
 import { Input } from "../ui/input";
 import { useEffect, useState } from "react";
 import { Button } from "../ui/button";
-import { LuFilter } from "react-icons/lu";
+import { IoSearch } from "react-icons/io5";
 import DeleteSport from "./delete-sport";
 import EditSportDialog from "./edit-sport";
 
@@ -77,9 +76,7 @@ export const columns: ColumnDef<Sport>[] = [
       return <span className="font-semibold">Color</span>;
     },
     cell: ({ row }) => (
-      <div
-        className="h-10 w-10 aspect-square rounded-md border p-[2px]  bg-transparent"
-      >
+      <div className="h-10 w-10 aspect-square rounded-md border p-[2px]  bg-transparent">
         <div
           className="h-full w-full rounded-sm"
           style={{ backgroundColor: row.original.color }}
@@ -187,8 +184,8 @@ export function SportTable() {
               router.push(`?${queryParams.toString()}`);
             }}
           >
-            Filter
-            <LuFilter className="ml-1 h-4 w-4" />
+            <IoSearch className="h-4 w-4" />
+            Search
           </Button>
         </div>
         <div className="rounded-md border overflow-x-auto min-w-full max-w-[50vw] mt-4">

@@ -29,17 +29,17 @@ export const accountFilterValues: FormFilterType[] = [
   { type: "search", title: "Search", inputType: FilterInputType.TEXT },
   {
     type: "isAdmin",
-    title: "Admin",
+    title: "Type",
     inputType: FilterInputType.BOOLEAN,
     trueTitle: "Admin",
     falseTitle: "User",
   },
   {
     type: "isBlocked",
-    title: "Active",
+    title: "Status",
     inputType: FilterInputType.BOOLEAN,
-    trueTitle: "Active",
-    falseTitle: "Blocked",
+    trueTitle: "Blocked",
+    falseTitle: "Active",
   },
 ];
 
