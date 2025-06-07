@@ -20,7 +20,7 @@ import {
 import { RecentActivity } from "@/lib/types";
 import TableSkeleton from "../table-skeleton";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
-import { formatSecondsToTime } from "@/lib/utils";
+import { formatMetersToKilometers, formatSecondsToTime } from "@/lib/utils";
 
 export const columns: ColumnDef<RecentActivity>[] = [
   {
@@ -48,7 +48,7 @@ export const columns: ColumnDef<RecentActivity>[] = [
   {
     accessorKey: "time",
     header: () => {
-      return <span className="font-semibold">Time</span>;
+      return <div className="flex justify-end">Time</div>;
     },
     cell: ({ row }) => (
       <div className="flex justify-end">
@@ -59,7 +59,7 @@ export const columns: ColumnDef<RecentActivity>[] = [
   {
     accessorKey: "gain",
     header: () => {
-      return <span className="font-semibold">Elev gain</span>;
+      return <div className="flex justify-end">Elev gain</div>;
     },
     cell: ({ row }) => (
       <div className="flex justify-end">{row.original.elevationGain} m</div>
@@ -68,18 +68,18 @@ export const columns: ColumnDef<RecentActivity>[] = [
   {
     accessorKey: "distance",
     header: () => {
-      return <span className="font-semibold">Distance</span>;
+      return <div className="flex justify-end">Distance</div>;
     },
     cell: ({ row }) => (
       <div className="flex justify-end">
-        {row.original.distance?.toFixed(2)}
+        {formatMetersToKilometers(row.original.distance ?? 0)}
       </div>
     ),
   },
   {
     accessorKey: "calories",
     header: () => {
-      return <span className="font-semibold">Calories</span>;
+      return <div className="flex justify-end">Calories</div>;
     },
     cell: ({ row }) => (
       <div className="flex justify-end">{row.original.calories}</div>
@@ -88,7 +88,7 @@ export const columns: ColumnDef<RecentActivity>[] = [
   {
     accessorKey: "avgHeartRate",
     header: () => {
-      return <span className="font-semibold">Avg Heart Rate</span>;
+      return <div className="flex justify-end">Avg Heart Rate</div>;
     },
     cell: ({ row }) => (
       <div className="flex justify-end">{row.original.avgHeartRate}</div>

@@ -28,7 +28,7 @@ const ReportFilter = ({ filters, onApplyFilters }: ReportFilterProps) => {
   }, [filters]);
 
   return (
-    <div className="flex flex-row gap-3">
+    <div className="flex flex-row gap-3 justify-end">
       <div>
         <span className="font-medium">From Date</span>
         <DaypickerPopup
@@ -53,7 +53,7 @@ const ReportFilter = ({ filters, onApplyFilters }: ReportFilterProps) => {
       </div>
       <Button
         type="submit"
-        className="self-end"
+        className="self-end px-10"
         onClick={() => {
           onApplyFilters({ fromDate: timeFrom ?? "", toDate: timeTo ?? "" });
         }}

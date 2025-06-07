@@ -189,11 +189,11 @@ export function AccountTable() {
   } else
     return (
       <div className="w-full">
-        <div className="flex justify-between items-center">
+        <div className="flex justify-between items-center flex-wrap gap-4">
           <h1 className="table___title">Manage Account</h1>
-          <div className="flex md:gap-4 gap-2">
-            <CreateAccountDialog onAdded={() => void mutate()} />
-            <CreateUserDialog onAdded={() => void mutate()} />
+          <div className="flex md:gap-4 gap-2 flex-wrap justify-end w-full">
+              <CreateAccountDialog onAdded={() => void mutate()} />
+              <CreateUserDialog onAdded={() => void mutate()} />
           </div>
         </div>
         <Filter

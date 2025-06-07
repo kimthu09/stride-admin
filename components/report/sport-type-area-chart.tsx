@@ -13,7 +13,7 @@ import {
   ChartTooltipContent,
 } from "@/components/ui/chart";
 import { SportMapBucket } from "@/lib/types";
-import { normalizeChartData } from "./sport-type-chart";
+import { normalizeTimeChartData } from "./sport-type-chart";
 import { formatSecondsToTime } from "@/lib/utils";
 
 const chartConfig = {
@@ -69,7 +69,7 @@ export function SportTypeAreaChart({
   fromDate,
   toDate,
 }: SportAreaChartProps) {
-  const chartData = normalizeChartData(fromDate, toDate, sportMapTypes);
+  const chartData = normalizeTimeChartData(fromDate, toDate, sportMapTypes);
 
   return (
     <Card className="flex flex-col flex-1">

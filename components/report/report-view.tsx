@@ -11,7 +11,7 @@ import SportListView from "./sport-list-view";
 import { SportTypeChart } from "./sport-type-chart";
 import { ActivityTable } from "./activity-table";
 import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
-import { formatSecondsToTime } from "@/lib/utils";
+import { formatMetersToKilometers, formatSecondsToTime } from "@/lib/utils";
 import { SportTypeAreaChart } from "./sport-type-area-chart";
 import ReportViewSkeleton from "./report-view-skeleton";
 
@@ -50,7 +50,7 @@ const ReportView = () => {
     <div className="-m-4 md:-m-10 w-[calc(100%+2rem)] md:w-[calc(100%+5rem)] bg-slate-100">
       <div className="md:p-10 p-4 w-full flex flex-col gap-5">
         <ReportFilter filters={filters} onApplyFilters={onApplyFilters} />
-        <div className="grid xl:grid-cols-5 md:grid-cols-3 grid-cols-2 gap-5">
+        <div className="grid 2xl:grid-cols-5 lg:grid-cols-3 grid-cols-2 gap-5">
           <DashboardCard
             title="Activities"
             value={activityData?.numberActivity ?? 0}
@@ -58,7 +58,7 @@ const ReportView = () => {
           />
           <DashboardCard
             title="Distance"
-            value={activityData?.totalDistance ?? 0}
+            value={formatMetersToKilometers(activityData?.totalDistance ?? 0)}
             className={classColor}
           />
           <DashboardCard
@@ -68,7 +68,7 @@ const ReportView = () => {
           />
           <DashboardCard
             title="Elevation Gain"
-            value={activityData?.totalElevationGain ?? 0}
+            value={`${activityData?.totalElevationGain ?? 0} m`}
             className={classColor}
           />
           <DashboardCard

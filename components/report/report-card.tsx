@@ -21,7 +21,7 @@ export default function DashboardCard({
     >
       <div>
         <p className="text-white">{title}</p>
-        <p className="text-5xl font-semibold text-white pt-1">{value}</p>
+        <p className="lg:text-[2.75rem] text-4xl font-semibold text-white pt-1">{value}</p>
       </div>
       <div
         className={`w-12 h-12 rounded-full flex items-center justify-center text-white`}

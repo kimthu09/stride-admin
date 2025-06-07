@@ -63,6 +63,40 @@ export function normalizeChartData(
     };
   });
 }
+
+export function normalizeTimeChartData(
+  from: number,
+  to: number,
+  sportMapTypes: SportMapBucket[]
+): { date: string; [key: string]: number | string }[] {
+  const dateLabels = getDateLabelsInRange(from, to);
+
+  const bucketMap = new Map<string, SportMapValue[]>();
+  sportMapTypes.forEach((bucket) => {
+    const dateStr = format(new Date(bucket.from), "dd-MM-yyyy");
+    bucketMap.set(dateStr, bucket.values);
+  });
+
+  return dateLabels.map((date) => {
+    const values = bucketMap.get(date) ?? [];
+    const defaultValues = {
+      DRIVING: 0,
+      WALKING: 0,
+      CYCLING: 0,
+      NO_MAP: 0,
+    };
+
+    values.forEach((v) => {
+      const key = v.type as keyof typeof defaultValues;
+      defaultValues[key] = v.time;
+    });
+
+    return {
+      date,
+      ...defaultValues,
+    };
+  });
+}
 export interface SportLineChartProps {
   sportMapTypes: SportMapBucket[];
   fromDate: number;
