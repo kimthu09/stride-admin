@@ -12,12 +12,10 @@ export interface CreateSportPayload {
 
 export const createSport = (payload: CreateSportPayload) => {
   if (payload.sportMapType === SportMapType.NOMAP) {
+    payload.rules = [];
+    payload.sportMapType = "NO_MAP";
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const { rules, ...data } = payload;
-    return axios.post<Sport>("/core/sports/manage", {
-      ...data,
-      sportMapType: null,
-    });
+    return axios.post<Sport>("/core/sports/manage", payload);
   } else {
     return axios.post<Sport>("/core/sports/manage", payload);
   }
