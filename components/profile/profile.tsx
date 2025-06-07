@@ -19,6 +19,12 @@ import { passwordMinError, required } from "@/lib/helpers/zod";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import { useAuth } from "../auth/auth-context";
 import ChangeAvatar from "./change-avatar";
+import { changePassword } from "@/lib/api/auth/changePassword";
+import { toast } from "@/hooks/use-toast";
+import { AxiosError } from "axios";
+import { ApiError } from "@/lib/types";
+import CreateNotification from "../notification/create-notification";
+import { GoBell } from "react-icons/go";
 
 const PasswordSchema = z
   .object({
@@ -31,7 +37,13 @@ const PasswordSchema = z
     path: ["confirmNewPass"],
   });
 
-const Profile = ({ children }: { children: React.ReactNode }) => {
+const Profile = ({
+  isCollapse,
+  children,
+}: {
+  isCollapse: boolean;
+  children: React.ReactNode;
+}) => {
   const { user, logout, mutate } = useAuth();
 
   const [open, setOpen] = useState(false);
@@ -54,28 +66,28 @@ const Profile = ({ children }: { children: React.ReactNode }) => {
   } = passForm;
 
   const onSubmitPass: SubmitHandler<z.infer<typeof PasswordSchema>> = async (
-    // data
+    data
   ) => {
-    // changePassword({
-    //   oldPassword: data.oldPassword,
-    //   newPassword: data.newPassword,
-    // })
-    //   .then(() => {
-    //     setOpen(false);
-    //     setOpenPass(false);
-    //     toast({
-    //       variant: "success",
-    //       title: "Sucess",
-    //       description: "Change password successfully",
-    //     });
-    //   })
-    //   .catch((err: AxiosError<ApiError>) => {
-    //     toast({
-    //       variant: "destructive",
-    //       title: "Error",
-    //       description: err.response?.data.message ?? "Change password failed",
-    //     });
-    //   });
+    changePassword({
+      oldPassword: data.oldPassword,
+      newPassword: data.newPassword,
+    })
+      .then(() => {
+        setOpen(false);
+        setOpenPass(false);
+        toast({
+          variant: "success",
+          title: "Sucess",
+          description: "Change password successfully",
+        });
+      })
+      .catch((err: AxiosError<ApiError>) => {
+        toast({
+          variant: "destructive",
+          title: "Error",
+          description: err.response?.data.message ?? "Change password failed",
+        });
+      });
   };
 
   const onOpenPass = (value: boolean) => {
@@ -92,10 +104,29 @@ const Profile = ({ children }: { children: React.ReactNode }) => {
   }, [user]);
 
   return (
-    <div>
+    <div className="md:w-full flex md:flex-col flex-row items-center">
+      <CreateNotification>
+        <Button
+          variant={"link"}
+          className="md:w-full px-3 py-3 md:hover:bg-gray-50 md:mb-2 h-auto justify-start"
+        >
+          <div
+            className={`md:flex hidden align-middle justify-center items-center gap-4 text-base no-underline text-black rounded-md overflow-hidden cursor-pointer`}
+          >
+            <GoBell className="!h-6 !w-6" />
+            <div className={`${isCollapse ? "hidden" : "flex"}`}>
+              Send notification
+            </div>
+          </div>
+          <Button size={"icon"} variant={"ghost"} className="rounded-full md:hidden flex">
+            <GoBell className="!h-6 !w-6 text-black" />
+          </Button>
+        </Button>
+      </CreateNotification>
+
       <Popover open={open} onOpenChange={setOpen}>
         <PopoverTrigger asChild>
-          <div className="flex items-center">
+          <div className="flex items-center md:w-full pl-1">
             <div className="relative">
               <Avatar className="cursor-pointer rounded-full border overflow-clip">
                 <AvatarImage src={avatar} alt="avatar" />

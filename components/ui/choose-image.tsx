@@ -2,19 +2,22 @@ import Image from "next/image";
 import React, { useState, ChangeEvent, useRef } from "react";
 import { Button } from "./button";
 import { PiPlus } from "react-icons/pi";
+import clsx from "clsx";
 
 interface ImageUploadProps {
   onUpload?: (files: File[]) => void;
   imageList?: string[];
   setImageList?: (imageList: string[]) => void;
   fileCount?: number;
+  isBanner?: boolean;
 }
 
 const ImageUpload: React.FC<ImageUploadProps> = ({
   onUpload,
   imageList,
   setImageList,
-  fileCount=10
+  fileCount = 10,
+  isBanner = false,
 }) => {
   const [fileList, setFileList] = useState<File[]>([]);
   const fileInputRef = useRef<HTMLInputElement | null>(null);
@@ -60,15 +63,30 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
       <div className="flex flex-wrap gap-3">
         {fileList.map((file, index) => (
           <div key={index} className="relative">
-            <div className="h-14 w-14 rounded-sm border-solid border-fs-gray-lighter border p-1">
-              <Image
-                width={100}
-                height={100}
-                src={URL.createObjectURL(file)}
-                alt={`Preview ${index}`}
-                className="w-full h-full object-cover"
-                onLoad={() => URL.revokeObjectURL(URL.createObjectURL(file))}
-              />
+            <div
+              className={clsx(
+                "h-14 w-14 rounded-sm border-solid border-fs-gray-lighter border p-1"
+              , isBanner===true&&"w-full h-auto")}
+            >
+              {isBanner === true ? (
+                <Image
+                  width={600}
+                  height={200}
+                  src={URL.createObjectURL(file)}
+                  alt={`Preview ${index}`}
+                  className="w-full h-full object-cover"
+                  onLoad={() => URL.revokeObjectURL(URL.createObjectURL(file))}
+                />
+              ) : (
+                <Image
+                  width={100}
+                  height={100}
+                  src={URL.createObjectURL(file)}
+                  alt={`Preview ${index}`}
+                  className="w-full h-full object-cover"
+                  onLoad={() => URL.revokeObjectURL(URL.createObjectURL(file))}
+                />
+              )}
             </div>
             <Button
               type="button"

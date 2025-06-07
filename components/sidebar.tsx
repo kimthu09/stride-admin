@@ -67,11 +67,11 @@ export default function Sidebar() {
         </nav>
         {user && (
           <div
-            className={`absolute px-1 bottom-10 flex items-center  ${
+            className={`absolute px-1 bottom-10 flex items-center w-full  ${
               isCollapse ? "justify-center" : "justify-start"
             }`}
           >
-            <Profile>
+            <Profile isCollapse={isCollapse}>
               <span
                 className={`ml-2 text-lg overflow-hidden cursor-pointer ${
                   isCollapse ? "hidden opacity-0" : "block opacity-100"

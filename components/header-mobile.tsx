@@ -40,7 +40,7 @@ const Header = () => {
   return (
     <div className="h-14 py-2 px-4 flex w-full justify-end shadow-sm md:hidden">
       <HeaderMobile />
-      <Profile>
+      <Profile isCollapse>
         <></>
       </Profile>
     </div>
